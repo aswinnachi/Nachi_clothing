@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product – Nachi Clothing</title>
+  <meta name="description" content="View product details at Nachi Clothing.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="announcement-bar">
+  <div class="marquee-track">
+    <span>Free shipping on selective products</span>
+    <span>New Arrivals Every Week – Shop Now</span>
+    <span>Order via WhatsApp: +91 95141 42266</span>
+    <span>Made to Order Available</span>
+    <span>Free shipping on selective products</span>
+    <span>New Arrivals Every Week – Shop Now</span>
+    <span>Order via WhatsApp: +91 95141 42266</span>
+    <span>Made to Order Available</span>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <div class="header-left">
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="main-nav">
+        <div class="nav-item"><a href="index.html" class="nav-link">Home</a></div>
+        <div class="nav-item">
+          <a class="nav-link" href="collection.html">Collection
+            <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </a>
+          <div class="nav-dropdown" id="categoryDropdown"></div>
+        </div>
+        <div class="nav-item"><a href="collection.html?category=Made+to+Order" class="nav-link">Made to Order</a></div>
+        <div class="nav-item"><a href="collection.html?category=Exclusive+Drops" class="nav-link">Exclusive Drops</a></div>
+      </nav>
+    </div>
+    <div class="header-center">
+      <a href="index.html" class="site-logo">
+        <img src="assets/logo.png" alt="Nachi Clothing" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="logo-text" style="display:none"><strong>NACHI</strong><span>CLOTHING</span></div>
+      </a>
+    </div>
+    <div class="header-right">
+      <button class="header-icon" data-open-search aria-label="Search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </button>
+      <a href="admin.html" class="header-icon" title="Owner Login">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </a>
+      <button class="header-icon" data-open-cart style="position:relative">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+<div class="mobile-nav-drawer" id="mobileNavDrawer">
+  <div class="mobile-nav-header">
+    <span style="font-family:'Playfair Display',serif;font-size:1.1rem">Nachi Clothing</span>
+    <button class="close-btn" id="mobileNavClose">✕</button>
+  </div>
+  <div class="mobile-nav-content">
+    <a href="index.html" class="mobile-nav-link">🏠 Home</a>
+    <a href="collection.html" class="mobile-nav-link">👗 All Collections</a>
+    <div class="mobile-sub-links" id="mobileCategoryLinks"></div>
+    <a href="admin.html" class="mobile-nav-link">🔐 Owner Login</a>
+  </div>
+</div>
+
+<!-- SEARCH OVERLAY -->
+<div class="search-overlay" id="searchOverlay">
+  <button id="searchClose" style="position:fixed;top:20px;right:20px;color:#fff;font-size:1.5rem;z-index:10;background:none;border:none;cursor:pointer">✕</button>
+  <div class="search-box">
+    <form id="searchForm">
+      <div class="search-input-wrap">
+        <input type="text" class="search-input" id="searchInput" placeholder="Search products...">
+        <button type="submit" class="search-submit">Search</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- BREADCRUMB -->
+<div style="background:var(--cream-dark);border-bottom:1px solid var(--border);padding:12px 0">
+  <div class="container">
+    <div class="breadcrumb" style="justify-content:flex-start">
+      <a href="index.html">Home</a>
+      <span>›</span>
+      <a href="collection.html">Collections</a>
+      <span>›</span>
+      <span id="breadcrumbProduct" style="color:var(--maroon)">Product</span>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCT DETAIL -->
+<section class="product-detail">
+  <div class="container">
+    <div id="productDetailContent">
+      <!-- Loaded dynamically -->
+      <div style="text-align:center;padding:80px 20px;color:var(--text-light)">
+        <div style="font-size:3rem;margin-bottom:16px">⏳</div>
+        <p>Loading product...</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RELATED PRODUCTS -->
+<section class="products-section alt" id="relatedSection" style="display:none">
+  <div class="container">
+    <div class="section-divider"><span>✦</span></div>
+    <h2 class="section-title">You May Also Like</h2>
+    <p class="section-subtitle">More from the same category</p>
+    <div class="products-grid" id="relatedGrid"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="assets/logo.png" alt="Nachi Clothing" onerror="this.style.display='none'">
+        <p>Nachi Clothing – Premium ethnic wear for every occasion.</p>
+        <div class="social-links">
+          <a href="https://wa.me/919514142266" target="_blank" class="social-link">💬</a>
+          <a href="#" class="social-link">📷</a>
+          <a href="#" class="social-link">📘</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Collections</h4>
+        <ul id="footerCategories"></ul>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="collection.html">All Products</a></li>
+          <li><a href="admin.html">Owner Login</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact Us</h4>
+        <div class="footer-contact-item"><span class="icon">📱</span><span>+91 95141 42266</span></div>
+        <a href="https://wa.me/919514142266" target="_blank" class="whatsapp-btn">💬 Chat with Us</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom"><p>© 2025 <span>Nachi Clothing</span>. All rights reserved.</p></div>
+</footer>
+
+<!-- CART DRAWER -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-drawer-header">
+    <h3>🛒 Your Cart</h3>
+    <button class="cart-close" id="cartClose">✕</button>
+  </div>
+  <div class="cart-drawer-body" id="cartDrawerBody"></div>
+  <div class="cart-drawer-footer" id="cartDrawerFooter" style="display:none">
+    <div class="cart-summary" id="cartSummary"></div>
+    <button class="cart-cta-btn" id="orderWhatsApp">💬 Order via WhatsApp</button>
+    <button class="cart-continue" onclick="closeCartDrawer()">← Continue Shopping</button>
+  </div>
+</div>
+<div class="toast-container"></div>
+
+<script src="js/app.js"></script>
+<script src="js/cart.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(window.location.search);
+  const productId = params.get('id');
+
+  // Populate navs
+  const categories = getCategories();
+  const dropdown = document.getElementById('categoryDropdown');
+  if (dropdown) dropdown.innerHTML = categories.map(c => `<a href="collection.html?category=${encodeURIComponent(c)}">${c}</a>`).join('');
+  const mobileLinks = document.getElementById('mobileCategoryLinks');
+  if (mobileLinks) mobileLinks.innerHTML = categories.map(c => `<a href="collection.html?category=${encodeURIComponent(c)}">${c}</a>`).join('');
+  const footerCats = document.getElementById('footerCategories');
+  if (footerCats) footerCats.innerHTML = categories.map(c => `<li><a href="collection.html?category=${encodeURIComponent(c)}">${c}</a></li>`).join('');
+
+  if (!productId) {
+    document.getElementById('productDetailContent').innerHTML = `
+      <div style="text-align:center;padding:80px 20px">
+        <div style="font-size:3rem;margin-bottom:16px">😕</div>
+        <p style="color:var(--text-light);margin-bottom:20px">Product not found.</p>
+        <a href="collection.html" class="btn btn-primary">Browse All Products</a>
+      </div>`;
+    return;
+  }
+
+  const products = getProducts();
+  const product = products.find(p => p.id === productId);
+
+  if (!product) {
+    document.getElementById('productDetailContent').innerHTML = `
+      <div style="text-align:center;padding:80px 20px">
+        <div style="font-size:3rem;margin-bottom:16px">😕</div>
+        <p style="color:var(--text-light);margin-bottom:20px">This product doesn't exist or was removed.</p>
+        <a href="collection.html" class="btn btn-primary">Browse All Products</a>
+      </div>`;
+    return;
+  }
+
+  // Update page title & breadcrumb
+  document.title = `${product.name} – Nachi Clothing`;
+  const breadEl = document.getElementById('breadcrumbProduct');
+  if (breadEl) breadEl.textContent = product.name;
+
+  const img = getProductImage(product);
+  const discount = product.originalPrice > product.price ? Math.round((1 - product.price / product.originalPrice) * 100) : 0;
+  const wishlist = getWishlist();
+  const isWishlisted = wishlist.includes(product.id);
+
+  document.getElementById('productDetailContent').innerHTML = `
+    <div class="product-detail-grid">
+      <!-- Gallery -->
+      <div class="product-gallery">
+        <div class="product-main-image" id="mainImageWrap">
+          <img src="${img}" alt="${product.name}" id="mainProductImage" onerror="this.src='${getCategoryImage(product.category)}'">
+        </div>
+        <div class="product-thumbs" id="thumbsContainer">
+          <div class="product-thumb active" onclick="switchImage('${img}', this)">
+            <img src="${img}" alt="${product.name}" onerror="this.src='${getCategoryImage(product.category)}'">
+          </div>
+        </div>
+      </div>
+
+      <!-- Info -->
+      <div class="product-detail-info">
+        <div class="product-detail-category">
+          <a href="collection.html?category=${encodeURIComponent(product.category)}" style="color:var(--gold-dark)">${product.category}</a>
+        </div>
+        <h1 class="product-detail-name">${product.name}</h1>
+
+        <div style="display:flex;gap:8px;margin-bottom:16px">
+          ${product.isNewArrival ? '<span class="badge badge-new">New Arrival</span>' : ''}
+          ${discount > 0 ? `<span class="badge badge-sale">${discount}% Off</span>` : ''}
+        </div>
+
+        <div class="product-detail-price">
+          <span class="price-current">${formatPrice(product.price)}</span>
+          ${discount > 0 ? `<span class="price-original">${formatPrice(product.originalPrice)}</span>
+          <span class="price-discount">${discount}% off</span>` : ''}
+        </div>
+
+        <div class="product-detail-divider"></div>
+
+        ${product.caption ? `<p class="product-detail-caption">${product.caption}</p>` : ''}
+
+        <!-- Quantity -->
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">
+          <span style="font-size:0.85rem;color:var(--text-medium);font-weight:600">Qty:</span>
+          <div style="display:flex;align-items:center;border:1.5px solid var(--border);border-radius:6px;overflow:hidden">
+            <button onclick="changeQty(-1)" style="padding:8px 14px;font-size:1.1rem;color:var(--maroon);background:var(--maroon-pale)">−</button>
+            <span id="detailQty" style="padding:8px 20px;font-weight:700">1</span>
+            <button onclick="changeQty(1)" style="padding:8px 14px;font-size:1.1rem;color:var(--maroon);background:var(--maroon-pale)">+</button>
+          </div>
+        </div>
+
+        <div class="product-detail-actions">
+          <button class="btn btn-primary" onclick="addToCartFromDetail('${product.id}')">
+            🛒 Add to Cart
+          </button>
+          <button class="btn btn-gold" onclick="buyNow('${product.id}')">
+            ⚡ Buy Now
+          </button>
+          <button class="btn btn-outline" id="wishlistDetailBtn" onclick="toggleWishlistDetail('${product.id}')" style="min-width:auto;padding:12px 16px">
+            ${isWishlisted ? '♥' : '♡'}
+          </button>
+        </div>
+
+        <!-- WhatsApp enquiry -->
+        <a href="https://wa.me/919514142266?text=Hello!%20I%20am%20interested%20in%20${encodeURIComponent(product.name)}%20(Price%3A%20${formatPrice(product.price)}).%20Please%20help%20me%20with%20the%20order."
+           target="_blank"
+           style="display:inline-flex;align-items:center;gap:8px;padding:11px 20px;background:#25D366;color:#fff;border-radius:6px;font-size:0.85rem;font-weight:700;margin-top:4px;transition:background 0.25s"
+           onmouseover="this.style.background='#1fab55'" onmouseout="this.style.background='#25D366'">
+          💬 Ask on WhatsApp
+        </a>
+
+        <div class="product-detail-divider"></div>
+
+        <!-- Meta -->
+        <div class="product-meta">
+          <div class="product-meta-row">
+            <span>Category</span>
+            <span><a href="collection.html?category=${encodeURIComponent(product.category)}" style="color:var(--maroon)">${product.category}</a></span>
+          </div>
+          <div class="product-meta-row">
+            <span>Availability</span>
+            <span style="color:#16a34a;font-weight:600">✓ In Stock</span>
+          </div>
+          <div class="product-meta-row">
+            <span>Shipping</span>
+            <span>${product.freeDelivery ? '🚚 Free Delivery' : 'Standard shipping ₹80'}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // Load related products
+  const related = products.filter(p => p.category === product.category && p.id !== product.id).slice(0, 4);
+  if (related.length > 0) {
+    document.getElementById('relatedSection').style.display = 'block';
+    document.getElementById('relatedGrid').innerHTML = related.map(p => renderProductCard(p)).join('');
+
+    // Restore wishlist on related cards
+    const wl = getWishlist();
+    document.querySelectorAll('#relatedGrid .product-wishlist').forEach(btn => {
+      const card = btn.closest('.product-card');
+      if (card && wl.includes(card.dataset.productId)) {
+        btn.textContent = '♥'; btn.classList.add('active');
+      }
+    });
+  }
+});
+
+let detailQty = 1;
+function changeQty(delta) {
+  detailQty = Math.max(1, detailQty + delta);
+  const el = document.getElementById('detailQty');
+  if (el) el.textContent = detailQty;
+}
+
+function addToCartFromDetail(productId) {
+  const products = getProducts();
+  const product = products.find(p => p.id === productId);
+  if (!product) return;
+  const cart = getCart();
+  const existing = cart.find(item => item.id === productId);
+  if (existing) existing.qty += detailQty;
+  else cart.push({ id: productId, qty: detailQty });
+  saveCart(cart);
+  showToast(`"${product.name}" added to cart!`, 'cart');
+  openCartDrawer();
+}
+
+function buyNow(productId) {
+  addToCartFromDetail(productId);
+  // Trigger WhatsApp order after adding
+  setTimeout(() => orderViaWhatsApp(), 500);
+}
+
+function toggleWishlistDetail(productId) {
+  const btn = document.getElementById('wishlistDetailBtn');
+  toggleWishlist(productId, btn);
+  const wl = getWishlist();
+  if (btn) btn.textContent = wl.includes(productId) ? '♥' : '♡';
+}
+
+function switchImage(src, thumbEl) {
+  const main = document.getElementById('mainProductImage');
+  if (main) main.src = src;
+  document.querySelectorAll('.product-thumb').forEach(t => t.classList.remove('active'));
+  if (thumbEl) thumbEl.classList.add('active');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Owner Panel – Nachi Clothing</title>
+  <meta name="robots" content="noindex">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<!-- ============================================
+     LOGIN SCREEN
+============================================ -->
+<div id="loginScreen">
+  <div class="login-card">
+    <div class="login-logo">
+      <img src="assets/logo.png" alt="Nachi Clothing" onerror="this.style.display='none'">
+    </div>
+    <div class="login-heading">
+      <h1>Owner Login</h1>
+      <p>This page is only for the owner of Nachi Clothing</p>
+    </div>
+    <div class="login-divider"><span>Please sign in to continue</span></div>
+
+    <div id="loginError" class="login-error"></div>
+
+    <form id="loginForm" autocomplete="off">
+      <div class="form-group">
+        <label for="adminUsername">👤 Your Name (Username)</label>
+        <input type="text" id="adminUsername" class="form-input" placeholder="Enter your username" autocomplete="username">
+      </div>
+      <div class="form-group">
+        <label for="adminPassword">🔒 Secret Password</label>
+        <div class="password-wrap">
+          <input type="password" id="adminPassword" class="form-input" placeholder="Enter your password" autocomplete="current-password">
+          <button type="button" class="toggle-password" onclick="togglePwd()" id="togglePwdBtn">👁️</button>
+        </div>
+      </div>
+      <button type="submit" class="login-btn">Sign In →</button>
+    </form>
+
+    <p style="text-align:center;margin-top:20px;font-size:0.78rem;color:#aaa">
+      <a href="index.html" style="color:var(--gold-dark)">← Back to Website</a>
+    </p>
+  </div>
+</div>
+
+<!-- ============================================
+     ADMIN PANEL
+============================================ -->
+<div id="adminPanel">
+  <div class="admin-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-brand">
+        <img src="assets/logo.png" alt="Nachi Clothing" onerror="this.style.display='none'">
+        <div class="brand-text">Owner Dashboard</div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-label">Main</div>
+        <a href="#section-dashboard" class="sidebar-link active" onclick="showSection('dashboard', this)">
+          <span class="icon">📊</span> Dashboard
+        </a>
+        <a href="#section-products" class="sidebar-link" onclick="showSection('products', this)">
+          <span class="icon">👗</span> My Products
+        </a>
+        <a href="#section-categories" class="sidebar-link" onclick="showSection('categories', this)">
+          <span class="icon">📂</span> Categories
+        </a>
+        <a href="#section-slider" class="sidebar-link" onclick="showSection('slider', this)">
+          <span class="icon">🖼️</span> Home Slider
+        </a>
+
+        <div class="nav-section-label" style="margin-top:12px">Website</div>
+        <a href="index.html" target="_blank" class="sidebar-link">
+          <span class="icon">🌐</span> View Website
+        </a>
+        <a href="collection.html" target="_blank" class="sidebar-link">
+          <span class="icon">🛍️</span> View Shop
+        </a>
+        <a href="https://wa.me/919514142266" target="_blank" class="sidebar-link">
+          <span class="icon">💬</span> Open WhatsApp
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div style="font-size:0.75rem;color:rgba(255,255,255,0.4);margin-bottom:10px;text-align:center">
+          Logged in as <strong style="color:var(--gold-light)">nachiclothing</strong>
+        </div>
+        <button class="logout-btn" id="logoutBtn">
+          🚪 Sign Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <div class="admin-main">
+
+      <!-- TOP BAR -->
+      <div class="admin-topbar">
+        <h2 id="topbarTitle">📊 Dashboard</h2>
+        <div class="topbar-right">
+          <span class="topbar-user">Welcome, <strong>nachiclothing</strong> 👋</span>
+          <a href="index.html" target="_blank" class="view-site-btn">🌐 View Website</a>
+        </div>
+      </div>
+
+      <!-- ADMIN CONTENT -->
+      <div class="admin-content">
+
+        <!-- ==================== DASHBOARD ==================== -->
+        <div id="section-dashboard">
+
+          <!-- Stats -->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon maroon">👗</div>
+              <div>
+                <div class="stat-value" id="statTotal">0</div>
+                <div class="stat-label">Total Products</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon gold">📂</div>
+              <div>
+                <div class="stat-value" id="statCategories">0</div>
+                <div class="stat-label">Categories</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon green">⭐</div>
+              <div>
+                <div class="stat-value" id="statFeatured">0</div>
+                <div class="stat-label">Featured Products</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon blue">🆕</div>
+              <div>
+                <div class="stat-value" id="statNew">0</div>
+                <div class="stat-label">New Arrivals</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Actions -->
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <h3>⚡ Quick Actions</h3>
+            </div>
+            <div class="admin-card-body">
+              <div style="display:flex;gap:12px;flex-wrap:wrap">
+                <button class="admin-primary-btn" onclick="showSection('products', null); openAddProductForm();">
+                  ➕ Add New Product
+                </button>
+                <a href="collection.html" target="_blank" class="admin-primary-btn" style="background:var(--gold);display:inline-flex;align-items:center;gap:6px">
+                  🛍️ View Shop
+                </a>
+                <a href="https://wa.me/919514142266" target="_blank" class="admin-primary-btn" style="background:#25D366;display:inline-flex;align-items:center;gap:6px">
+                  💬 Open WhatsApp
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tips -->
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <h3>💡 Tips for You</h3>
+            </div>
+            <div class="admin-card-body">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+                <div style="background:var(--maroon-pale);padding:16px;border-radius:8px;border-left:4px solid var(--maroon)">
+                  <div style="font-weight:700;color:var(--maroon);margin-bottom:6px">📸 Upload Product Photos</div>
+                  <div style="font-size:0.82rem;color:var(--text-medium)">Go to "My Products" → "Add New Product" and upload a clear photo of your item. Good photos help customers buy more!</div>
+                </div>
+                <div style="background:var(--gold-pale);padding:16px;border-radius:8px;border-left:4px solid var(--gold)">
+                  <div style="font-weight:700;color:var(--gold-dark);margin-bottom:6px">💰 Edit Price Easily</div>
+                  <div style="font-size:0.82rem;color:var(--text-medium)">In the product list, click the ✏️ button next to any price to change it quickly without opening the full form.</div>
+                </div>
+                <div style="background:#dcfce7;padding:16px;border-radius:8px;border-left:4px solid #16a34a">
+                  <div style="font-weight:700;color:#15803d;margin-bottom:6px">⭐ Mark as Featured</div>
+                  <div style="font-size:0.82rem;color:var(--text-medium)">Featured products appear on the home page. Mark your best items as featured to show them first!</div>
+                </div>
+                <div style="background:#dbeafe;padding:16px;border-radius:8px;border-left:4px solid #3b82f6">
+                  <div style="font-weight:700;color:#1d4ed8;margin-bottom:6px">🆕 New Arrivals</div>
+                  <div style="font-size:0.82rem;color:var(--text-medium)">Mark new items as "New Arrival" so they appear in the New Arrivals section and attract more customers.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ==================== PRODUCTS SECTION ==================== -->
+        <div id="section-products" style="display:none">
+
+          <!-- Add/Edit Product Form -->
+          <div class="admin-card" id="productFormSection">
+            <div class="admin-card-header">
+              <h3 id="productFormTitle">➕ Add New Product</h3>
+              <button onclick="cancelProductForm()" style="font-size:1.1rem;color:var(--text-light)">✕</button>
+            </div>
+            <div class="admin-card-body">
+              <form id="productForm">
+                <div class="product-form-grid">
+
+                  <!-- Product Name -->
+                  <div class="admin-form-group">
+                    <label for="prodName">Product Name *</label>
+                    <input type="text" id="prodName" class="admin-input" placeholder="e.g. Royal Kanjivaram Silk Saree" required>
+                  </div>
+
+                  <!-- Category -->
+                  <div class="admin-form-group">
+                    <label for="prodCategory">Category *</label>
+                    <select id="prodCategory" class="admin-select category-select" required>
+                      <option value="">-- Pick a Category --</option>
+                    </select>
+                  </div>
+
+                  <!-- Price -->
+                  <div class="admin-form-group">
+                    <label for="prodPrice">Selling Price (₹) *</label>
+                    <div class="price-input-wrap">
+                      <input type="number" id="prodPrice" class="admin-input" placeholder="e.g. 1299" min="1" required>
+                    </div>
+                  </div>
+
+                  <!-- Original Price -->
+                  <div class="admin-form-group">
+                    <label for="prodOriginalPrice">Original Price (₹) <span style="color:var(--text-light);font-weight:400">(optional – for showing discount)</span></label>
+                    <div class="price-input-wrap">
+                      <input type="number" id="prodOriginalPrice" class="admin-input" placeholder="e.g. 1999" min="0">
+                    </div>
+                  </div>
+
+                  <!-- Caption / Description -->
+                  <div class="admin-form-group form-full">
+                    <label for="prodCaption">Description / Caption</label>
+                    <textarea id="prodCaption" class="admin-textarea" placeholder="Write a short description of the product, fabric, occasion..."></textarea>
+                  </div>
+
+                  <!-- Checkboxes -->
+                  <div class="admin-form-group form-full">
+                    <label>Product Labels</label>
+                    <div class="checkbox-group">
+                      <label class="admin-checkbox-label">
+                        <input type="checkbox" id="prodFeatured">
+                        ⭐ Show on Home Page (Featured)
+                      </label>
+                      <label class="admin-checkbox-label">
+                        <input type="checkbox" id="prodNewArrival">
+                        🆕 Mark as New Arrival
+                      </label>
+                      <label class="admin-checkbox-label">
+                        <input type="checkbox" id="prodFreeDelivery">
+                        🚚 Free Delivery for this product
+                      </label>
+                    </div>
+                  </div>
+
+                  <!-- Image Upload -->
+                  <div class="admin-form-group image-upload-area">
+                    <label>Product Photo</label>
+                    <input type="file" id="imageFileInput" accept="image/*" style="display:none">
+
+                    <div id="imageDropzone" class="image-dropzone">
+                      <div class="upload-icon">📷</div>
+                      <p><strong>Click here to upload a photo</strong><br>or drag and drop an image</p>
+                      <p style="font-size:0.75rem;color:#bbb">Supports JPG, PNG, WEBP (max 5MB)</p>
+                    </div>
+
+                    <div class="image-preview-wrap" style="display:flex;flex-direction:column;align-items:flex-start;gap:8px">
+                      <img id="imagePreview" alt="Preview">
+                      <button type="button" id="removeImageBtn">✕ Remove Photo</button>
+                    </div>
+
+                    <div style="margin-top:14px">
+                      <label for="prodImageUrl" style="font-size:0.82rem;font-weight:600;color:var(--text-medium);display:block;margin-bottom:6px">Or Paste Image URL</label>
+                      <input type="url" id="prodImageUrl" class="admin-input" placeholder="e.g. https://imgur.com/your-image.jpg">
+                    </div>
+
+                    <p style="font-size:0.78rem;color:var(--text-light);margin-top:10px">
+                      💡 If you skip adding a photo, a coloured placeholder will be shown based on the category.
+                    </p>
+                  </div>
+
+                </div>
+
+                <div class="form-actions">
+                  <button type="button" class="admin-cancel-btn" id="cancelFormBtn">Cancel</button>
+                  <button type="submit" class="admin-save-btn">💾 Save Product</button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Products List -->
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <h3>👗 All Products</h3>
+              <button class="admin-primary-btn" id="addProductBtn">➕ Add New Product</button>
+            </div>
+            <div class="admin-card-body">
+
+              <!-- Toolbar / Filters -->
+              <div class="table-toolbar">
+                <div class="table-filters">
+                  <input type="text" id="filterSearch" class="table-search" placeholder="🔍 Search by name or category...">
+                  <select id="filterCategory" class="table-select category-select">
+                    <option value="">All Categories</option>
+                  </select>
+                </div>
+                <div style="font-size:0.82rem;color:var(--text-light)" id="tableProductCount"></div>
+              </div>
+
+              <!-- Table -->
+              <div class="table-wrap">
+                <table class="admin-table">
+                  <thead>
+                    <tr>
+                      <th>Product</th>
+                      <th>Category</th>
+                      <th>Price</th>
+                      <th>Featured</th>
+                      <th>New Arrival</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="productsTableBody">
+                    <tr><td colspan="6" style="text-align:center;padding:40px;color:var(--text-light)">Loading...</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ==================== CATEGORIES SECTION ==================== -->
+        <div id="section-categories" style="display:none">
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <h3>📂 Manage Categories</h3>
+            </div>
+            <div class="admin-card-body">
+              <p style="font-size:0.88rem;color:var(--text-light);margin-bottom:20px">
+                These are the types of clothing on your website. You can add new types or delete old ones.
+              </p>
+
+              <!-- Current categories -->
+              <div class="categories-tags-wrap" id="categoriesList"></div>
+
+              <!-- Add new category -->
+              <div style="margin-top:8px">
+                <label style="font-size:0.82rem;font-weight:600;color:var(--text-medium);display:block;margin-bottom:8px">
+                  Add a New Category
+                </label>
+                <div class="add-category-row">
+                  <input type="text" id="newCategoryInput" class="cat-input" placeholder="e.g. Bridal Wear, Saree Blouses...">
+                  <button class="admin-primary-btn" id="addCategoryBtn">+ Add</button>
+                </div>
+              </div>
+
+              <div style="margin-top:24px;padding:16px;background:var(--gold-pale);border-radius:8px;border-left:4px solid var(--gold)">
+                <div style="font-weight:700;color:var(--gold-dark);margin-bottom:6px">💡 How Categories Work</div>
+                <div style="font-size:0.82rem;color:var(--text-medium)">
+                  Categories group your products. They appear in the navigation menu, filters and category grid on the home page.
+                  When you add a product, you pick one of these categories for it.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category Images -->
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <h3>🖼️ Category Images</h3>
+            </div>
+            <div class="admin-card-body">
+              <p style="font-size:0.88rem;color:var(--text-light);margin-bottom:20px">
+                Upload a photo for each category. These appear on the home page category grid and collection page.
+              </p>
+              <div id="categoryImagesGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px">
+                <!-- Rendered by JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Category product counts -->
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <h3>📊 Products per Category</h3>
+            </div>
+            <div class="admin-card-body" id="categoryStatsBody">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== SLIDER SECTION ==================== -->
+        <div id="section-slider" style="display:none">
+
+          <!-- Slider list -->
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <h3>🖼️ Home Page Slider</h3>
+              <button class="admin-primary-btn" onclick="openSliderForm(null)">➕ Add New Slide</button>
+            </div>
+            <div class="admin-card-body">
+              <p style="font-size:0.88rem;color:var(--text-light);margin-bottom:20px">
+                These are the big banner slides on the home page. You can add your own photos, title, and button.
+              </p>
+              <div id="sliderList" style="display:flex;flex-direction:column;gap:16px"></div>
+            </div>
+          </div>
+
+          <!-- Add/Edit Slide Form -->
+          <div class="admin-card" id="sliderFormCard" style="display:none">
+            <div class="admin-card-header">
+              <h3 id="sliderFormTitle">➕ Add New Slide</h3>
+              <button onclick="closeSliderForm()" style="font-size:1.1rem;color:var(--text-light)">✕</button>
+            </div>
+            <div class="admin-card-body">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+                <div class="admin-form-group form-full">
+                  <label>Slide Image</label>
+                  <input type="file" id="slideImgInput" accept="image/*" style="display:none">
+                  <div id="slideImgDropzone" class="image-dropzone" style="min-height:120px" onclick="document.getElementById('slideImgInput').click()">
+                    <div class="upload-icon">🖼️</div>
+                    <p><strong>Click to upload slide image</strong></p>
+                  </div>
+                  <div id="slideImgPreviewWrap" style="display:none;margin-top:10px">
+                    <img id="slideImgPreview" style="max-height:120px;border-radius:8px;object-fit:cover;width:100%">
+                    <button type="button" onclick="clearSlideImg()" style="margin-top:6px;font-size:0.8rem;color:var(--maroon)">✕ Remove</button>
+                  </div>
+                  <div style="margin-top:10px">
+                    <label style="font-size:0.82rem;font-weight:600;display:block;margin-bottom:6px">Or Paste Image URL</label>
+                    <input type="url" id="slideImgUrl" class="admin-input" placeholder="https://...">
+                  </div>
+                </div>
+
+                <div class="admin-form-group">
+                  <label>Slide Tag (small text above title)</label>
+                  <input type="text" id="slideTag" class="admin-input" placeholder="e.g. ✦ New Collection 2025">
+                </div>
+                <div class="admin-form-group">
+                  <label>Slide Title *</label>
+                  <input type="text" id="slideTitle" class="admin-input" placeholder="e.g. Elegance in Every Thread" required>
+                </div>
+                <div class="admin-form-group form-full">
+                  <label>Subtitle / Description</label>
+                  <textarea id="slideSubtitle" class="admin-textarea" rows="2" placeholder="A short line describing this slide..."></textarea>
+                </div>
+                <div class="admin-form-group">
+                  <label>Button 1 Text</label>
+                  <input type="text" id="slideBtn1Text" class="admin-input" placeholder="e.g. Shop Now">
+                </div>
+                <div class="admin-form-group">
+                  <label>Button 1 Link</label>
+                  <input type="text" id="slideBtn1Link" class="admin-input" placeholder="e.g. collection.html">
+                </div>
+                <div class="admin-form-group">
+                  <label>Button 2 Text (optional)</label>
+                  <input type="text" id="slideBtn2Text" class="admin-input" placeholder="e.g. New Arrivals">
+                </div>
+                <div class="admin-form-group">
+                  <label>Button 2 Link</label>
+                  <input type="text" id="slideBtn2Link" class="admin-input" placeholder="e.g. collection.html?filter=new">
+                </div>
+              </div>
+              <div class="form-actions" style="margin-top:20px">
+                <button class="admin-cancel-btn" onclick="closeSliderForm()">Cancel</button>
+                <button class="admin-save-btn" onclick="saveSlide()">💾 Save Slide</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div><!-- end admin-content -->
+    </div><!-- end admin-main -->
+  </div><!-- end admin-layout -->
+</div><!-- end adminPanel -->
+
+<script src="js/app.js"></script>
+<script src="js/admin.js"></script>
+<script>
+  // Toggle password visibility
+  function togglePwd() {
+    const input = document.getElementById('adminPassword');
+    const btn = document.getElementById('togglePwdBtn');
+    if (input.type === 'password') {
+      input.type = 'text';
+      btn.textContent = '🙈';
+    } else {
+      input.type = 'password';
+      btn.textContent = '👁️';
+    }
+  }
+
+  // Section switcher
+  function showSection(name, el) {
+    const sections = ['dashboard', 'products', 'categories', 'slider'];
+    sections.forEach(s => {
+      const sec = document.getElementById('section-' + s);
+      if (sec) sec.style.display = s === name ? 'block' : 'none';
+    });
+
+    // Update sidebar active state
+    document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+    if (el) el.classList.add('active');
+
+    // Update topbar title
+    const titles = { dashboard: '📊 Dashboard', products: '👗 My Products', categories: '📂 Categories', slider: '🖼️ Home Slider' };
+    const topbar = document.getElementById('topbarTitle');
+    if (topbar) topbar.textContent = titles[name] || '';
+
+    // Refresh category stats when viewing categories
+    if (name === 'categories') { renderCategoryStats(); renderCategoryImages(); }
+    if (name === 'slider') renderSliderList();
+  }
+
+  function renderCategoryStats() {
+    const body = document.getElementById('categoryStatsBody');
+    if (!body) return;
+    const categories = getCategories();
+    const products = getProducts();
+
+    body.innerHTML = categories.map(cat => {
+      const count = products.filter(p => p.category === cat).length;
+      const pct = products.length ? Math.round((count / products.length) * 100) : 0;
+      return `
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px">
+          <div style="min-width:140px;font-size:0.88rem;font-weight:600;color:var(--text-dark)">${cat}</div>
+          <div style="flex:1;background:var(--cream-dark);border-radius:6px;height:10px;overflow:hidden">
+            <div style="width:${pct}%;background:var(--maroon);height:100%;border-radius:6px;transition:width 0.6s ease"></div>
+          </div>
+          <div style="min-width:80px;font-size:0.82rem;color:var(--text-light);text-align:right">${count} product${count !== 1 ? 's' : ''}</div>
+          <a href="collection.html?category=${encodeURIComponent(cat)}" target="_blank" style="font-size:0.75rem;color:var(--gold-dark);white-space:nowrap">View →</a>
+        </div>
+      `;
+    }).join('') || '<p style="color:var(--text-light);text-align:center;padding:20px">No categories yet.</p>';
+  }
+
+  // Override renderProductTable to also update count badge
+  const _origRender = window.renderProductTable;
+  window.renderProductTable = function(filterCat, filterSearch) {
+    const shown = _origRender(filterCat, filterSearch) || 0;
+    const total = getProducts().length;
+    const count = document.getElementById('tableProductCount');
+    if (count) {
+      if (shown === total) {
+        count.textContent = `${total} total products`;
+      } else {
+        count.textContent = `Showing ${shown} of ${total} products`;
+      }
+    }
+  };
+
+  // ==================== CATEGORY IMAGES ====================
+  function renderCategoryImages() {
+    const categories = getCategories();
+    const imgs = getCategoryImages();
+    const grid = document.getElementById('categoryImagesGrid');
+    if (!grid) return;
+
+    grid.innerHTML = categories.map(cat => {
+      const hasImg = imgs[cat] && imgs[cat].length > 10;
+      const thumb = hasImg ? imgs[cat] : '';
+      return `
+        <div style="background:var(--cream-dark);border-radius:12px;overflow:hidden;border:1.5px solid var(--border)">
+          <div style="position:relative;aspect-ratio:3/4;background:#eee;overflow:hidden">
+            ${hasImg ? `<img src="${thumb}" style="width:100%;height:100%;object-fit:cover">` : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:#ccc">🖼️</div>`}
+          </div>
+          <div style="padding:12px">
+            <div style="font-weight:700;font-size:0.9rem;margin-bottom:8px;color:var(--text-dark)">${cat}</div>
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+              <input type="file" accept="image/*" style="display:none" onchange="uploadCategoryImage('${cat}', this)">
+              <span style="font-size:0.78rem;padding:6px 12px;background:var(--maroon-pale);color:var(--maroon);border-radius:6px;font-weight:600">📷 Upload Photo</span>
+            </label>
+            <div style="margin-top:8px">
+              <input type="url" placeholder="Or paste URL" class="admin-input" style="font-size:0.78rem;padding:6px 10px" 
+                value="${hasImg && imgs[cat].startsWith('http') ? imgs[cat] : ''}"
+                onchange="saveCategoryImageUrl('${cat}', this.value)">
+            </div>
+            ${hasImg ? `<button onclick="clearCategoryImage('${cat}')" style="margin-top:6px;font-size:0.75rem;color:var(--maroon);text-decoration:underline;background:none;border:none;cursor:pointer">✕ Remove photo</button>` : ''}
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function uploadCategoryImage(cat, inputEl) {
+    const file = inputEl.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+      const imgs = getCategoryImages();
+      imgs[cat] = e.target.result;
+      saveCategoryImages(imgs);
+      renderCategoryImages();
+      showAdminToast(`Photo updated for ${cat}!`, 'success');
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function saveCategoryImageUrl(cat, url) {
+    if (!url) return;
+    const imgs = getCategoryImages();
+    imgs[cat] = url;
+    saveCategoryImages(imgs);
+    showAdminToast(`Image URL saved for ${cat}!`, 'success');
+  }
+
+  function clearCategoryImage(cat) {
+    const imgs = getCategoryImages();
+    delete imgs[cat];
+    saveCategoryImages(imgs);
+    renderCategoryImages();
+    showAdminToast(`Photo removed for ${cat}`, 'info');
+  }
+
+  // ==================== SLIDER MANAGEMENT ====================
+  function getSlides() {
+    try { return JSON.parse(localStorage.getItem('nachi_slides') || 'null'); } catch { return null; }
+  }
+  function saveSlides(slides) {
+    localStorage.setItem('nachi_slides', JSON.stringify(slides));
+  }
+
+  let _editSlideIndex = null;
+  let _slideImgData = '';
+
+  function renderSliderList() {
+    const slides = getSlides() || getDefaultSlides();
+    const list = document.getElementById('sliderList');
+    if (!list) return;
+
+    if (!slides.length) {
+      list.innerHTML = '<p style="color:var(--text-light);text-align:center;padding:20px">No slides yet. Add your first slide!</p>';
+      return;
+    }
+
+    list.innerHTML = slides.map((s, i) => {
+      const bg = s.image ? `url(${s.image.startsWith('data:') || s.image.startsWith('http') ? s.image : s.image}) center/cover` : 'linear-gradient(135deg,#8B1A2C,#C9A84C)';
+      return `
+        <div style="display:flex;align-items:center;gap:16px;background:var(--cream-dark);border-radius:12px;overflow:hidden;border:1.5px solid var(--border)">
+          <div style="width:100px;min-width:100px;height:70px;background:${bg};flex-shrink:0"></div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:0.75rem;color:var(--gold-dark);font-weight:700">${s.tag || ''}</div>
+            <div style="font-weight:700;font-size:0.95rem;color:var(--maroon-dark);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${s.title || '(No title)'}</div>
+            <div style="font-size:0.78rem;color:var(--text-light);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${s.subtitle || ''}</div>
+          </div>
+          <div style="display:flex;gap:8px;padding-right:16px;flex-shrink:0">
+            <button onclick="moveSlide(${i},-1)" title="Move Up" style="padding:6px 10px;background:var(--cream);border-radius:6px;border:1px solid var(--border)">↑</button>
+            <button onclick="moveSlide(${i},1)" title="Move Down" style="padding:6px 10px;background:var(--cream);border-radius:6px;border:1px solid var(--border)">↓</button>
+            <button onclick="openSliderForm(${i})" style="padding:6px 12px;background:var(--maroon-pale);color:var(--maroon);border-radius:6px;font-size:0.82rem;font-weight:600">✏️ Edit</button>
+            <button onclick="deleteSlide(${i})" style="padding:6px 12px;background:#fee2e2;color:#dc2626;border-radius:6px;font-size:0.82rem;font-weight:600">🗑️ Delete</button>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function getDefaultSlides() {
+    return [
+      { image: '', tag: '✦ New Collection 2025', title: 'Elegance in Every Thread', subtitle: 'Discover handpicked ethnic wear that celebrates Indian craftsmanship.', btn1Text: 'Shop Collection', btn1Link: 'collection.html', btn2Text: 'New Arrivals', btn2Link: 'collection.html?filter=new' },
+      { image: '', tag: '✦ Handloom Special', title: 'Pure Silk Sarees – Woven with Love', subtitle: 'Authentic Kanjivaram, Banarasi & Chanderi sarees.', btn1Text: 'Shop Sarees', btn1Link: 'collection.html?category=Sarees', btn2Text: '', btn2Link: '' },
+      { image: '', tag: '✦ Kids & Maternity', title: 'Dress Your Little Ones in Style', subtitle: 'Adorable traditional outfits for children and maternity wear.', btn1Text: 'Shop Kids', btn1Link: 'collection.html?category=Kids', btn2Text: 'Maternity', btn2Link: 'collection.html?category=Maternity' },
+    ];
+  }
+
+  function openSliderForm(index) {
+    _editSlideIndex = index;
+    _slideImgData = '';
+    const slides = getSlides() || getDefaultSlides();
+    const s = index !== null ? slides[index] : {};
+
+    document.getElementById('sliderFormTitle').textContent = index !== null ? '✏️ Edit Slide' : '➕ Add New Slide';
+    document.getElementById('slideTag').value = s.tag || '';
+    document.getElementById('slideTitle').value = s.title || '';
+    document.getElementById('slideSubtitle').value = s.subtitle || '';
+    document.getElementById('slideBtn1Text').value = s.btn1Text || '';
+    document.getElementById('slideBtn1Link').value = s.btn1Link || '';
+    document.getElementById('slideBtn2Text').value = s.btn2Text || '';
+    document.getElementById('slideBtn2Link').value = s.btn2Link || '';
+    document.getElementById('slideImgUrl').value = (s.image && s.image.startsWith('http')) ? s.image : '';
+
+    // Preview existing image
+    const previewWrap = document.getElementById('slideImgPreviewWrap');
+    const previewImg = document.getElementById('slideImgPreview');
+    if (s.image && s.image.length > 10) {
+      previewImg.src = s.image; previewWrap.style.display = 'block';
+      document.getElementById('slideImgDropzone').style.display = 'none';
+      _slideImgData = s.image;
+    } else {
+      previewWrap.style.display = 'none';
+      document.getElementById('slideImgDropzone').style.display = 'flex';
+    }
+
+    document.getElementById('sliderFormCard').style.display = 'block';
+    document.getElementById('sliderFormCard').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function closeSliderForm() {
+    document.getElementById('sliderFormCard').style.display = 'none';
+    _editSlideIndex = null;
+    _slideImgData = '';
+  }
+
+  function clearSlideImg() {
+    _slideImgData = '';
+    document.getElementById('slideImgPreviewWrap').style.display = 'none';
+    document.getElementById('slideImgDropzone').style.display = 'flex';
+    document.getElementById('slideImgInput').value = '';
+    document.getElementById('slideImgUrl').value = '';
+  }
+
+  function saveSlide() {
+    const title = document.getElementById('slideTitle').value.trim();
+    if (!title) { showAdminToast('Please enter a slide title', 'error'); return; }
+
+    // Determine image
+    let image = _slideImgData || document.getElementById('slideImgUrl').value.trim() || '';
+
+    const slide = {
+      image,
+      tag: document.getElementById('slideTag').value.trim(),
+      title,
+      subtitle: document.getElementById('slideSubtitle').value.trim(),
+      btn1Text: document.getElementById('slideBtn1Text').value.trim(),
+      btn1Link: document.getElementById('slideBtn1Link').value.trim(),
+      btn2Text: document.getElementById('slideBtn2Text').value.trim(),
+      btn2Link: document.getElementById('slideBtn2Link').value.trim(),
+    };
+
+    const slides = getSlides() || getDefaultSlides();
+    if (_editSlideIndex !== null) {
+      slides[_editSlideIndex] = slide;
+    } else {
+      slides.push(slide);
+    }
+    saveSlides(slides);
+    closeSliderForm();
+    renderSliderList();
+    showAdminToast(_editSlideIndex !== null ? 'Slide updated!' : 'Slide added!', 'success');
+  }
+
+  function deleteSlide(index) {
+    if (!confirm('Delete this slide?')) return;
+    const slides = getSlides() || getDefaultSlides();
+    slides.splice(index, 1);
+    saveSlides(slides);
+    renderSliderList();
+    showAdminToast('Slide deleted', 'info');
+  }
+
+  function moveSlide(index, dir) {
+    const slides = getSlides() || getDefaultSlides();
+    const newIndex = index + dir;
+    if (newIndex < 0 || newIndex >= slides.length) return;
+    [slides[index], slides[newIndex]] = [slides[newIndex], slides[index]];
+    saveSlides(slides);
+    renderSliderList();
+  }
+
+  // Handle slide image file upload
+  document.addEventListener('DOMContentLoaded', () => {
+    const slideInput = document.getElementById('slideImgInput');
+    if (slideInput) {
+      slideInput.addEventListener('change', e => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = ev => {
+          _slideImgData = ev.target.result;
+          const previewImg = document.getElementById('slideImgPreview');
+          const previewWrap = document.getElementById('slideImgPreviewWrap');
+          previewImg.src = _slideImgData;
+          previewWrap.style.display = 'block';
+          document.getElementById('slideImgDropzone').style.display = 'none';
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+  });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Collection – Nachi Clothing</title>
+  <meta name="description" content="Browse all ethnic wear collections at Nachi Clothing – Sarees, Kurtis, Ethnic Sets, Kids, Maternity, Casuals and more.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="announcement-bar">
+  <div class="marquee-track">
+    <span>Free shipping on selective products</span>
+    <span>New Arrivals Every Week – Shop Now</span>
+    <span>Ethnic Wear for All Occasions</span>
+    <span>Order via WhatsApp: +91 95141 42266</span>
+    <span>Made to Order Available</span>
+    <span>Free shipping on selective products</span>
+    <span>New Arrivals Every Week – Shop Now</span>
+    <span>Ethnic Wear for All Occasions</span>
+    <span>Order via WhatsApp: +91 95141 42266</span>
+    <span>Made to Order Available</span>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <div class="header-left">
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="main-nav">
+        <div class="nav-item"><a href="index.html" class="nav-link">Home</a></div>
+        <div class="nav-item">
+          <a class="nav-link active" href="collection.html">Collection
+            <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </a>
+          <div class="nav-dropdown" id="categoryDropdown"></div>
+        </div>
+        <div class="nav-item"><a href="collection.html?category=Made+to+Order" class="nav-link">Made to Order</a></div>
+        <div class="nav-item"><a href="collection.html?category=Exclusive+Drops" class="nav-link">Exclusive Drops</a></div>
+      </nav>
+    </div>
+    <div class="header-center">
+      <a href="index.html" class="site-logo">
+        <img src="assets/logo.png" alt="Nachi Clothing" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="logo-text" style="display:none"><strong>NACHI</strong><span>CLOTHING</span></div>
+      </a>
+    </div>
+    <div class="header-right">
+      <button class="header-icon" data-open-search aria-label="Search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </button>
+      <a href="admin.html" class="header-icon" title="Owner Login">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </a>
+      <button class="header-icon" data-open-cart style="position:relative">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+<div class="mobile-nav-drawer" id="mobileNavDrawer">
+  <div class="mobile-nav-header">
+    <span style="font-family:'Playfair Display',serif;font-size:1.1rem">Nachi Clothing</span>
+    <button class="close-btn" id="mobileNavClose">✕</button>
+  </div>
+  <div class="mobile-nav-content">
+    <a href="index.html" class="mobile-nav-link">🏠 Home</a>
+    <a href="collection.html" class="mobile-nav-link">👗 All Collections</a>
+    <div class="mobile-sub-links" id="mobileCategoryLinks"></div>
+    <a href="collection.html?category=Immediate+Dispatch" class="mobile-nav-link">⚡ Immediate Dispatch</a>
+    <a href="collection.html?category=Exclusive+Drops" class="mobile-nav-link">✨ Exclusive Drops</a>
+    <a href="admin.html" class="mobile-nav-link">🔐 Owner Login</a>
+  </div>
+</div>
+
+<!-- SEARCH OVERLAY -->
+<div class="search-overlay" id="searchOverlay">
+  <button id="searchClose" style="position:fixed;top:20px;right:20px;color:#fff;font-size:1.5rem;z-index:10;background:none;border:none;cursor:pointer">✕</button>
+  <div class="search-box">
+    <form id="searchForm">
+      <div class="search-input-wrap">
+        <input type="text" class="search-input" id="searchInput" placeholder="Search sarees, kurtis, kids wear...">
+        <button type="submit" class="search-submit">Search</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- PAGE BANNER -->
+<section class="page-banner">
+  <div class="container">
+    <h1 id="pageBannerTitle">All Collections</h1>
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span>›</span>
+      <span id="breadcrumbCurrent">Collections</span>
+    </div>
+  </div>
+</section>
+
+<!-- COLLECTION LAYOUT -->
+<div class="container">
+  <div class="collection-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <!-- Categories -->
+      <div class="sidebar-card">
+        <h3>Categories</h3>
+        <div id="sidebarCategories"></div>
+      </div>
+
+      <!-- Price Filter -->
+      <div class="sidebar-card">
+        <h3>Price Range</h3>
+        <div class="price-range-input">
+          <input type="number" id="priceMin" placeholder="Min ₹" min="0">
+          <input type="number" id="priceMax" placeholder="Max ₹" min="0">
+        </div>
+        <button class="apply-filter-btn" onclick="applyPriceFilter()">Apply</button>
+      </div>
+
+      <!-- Sort -->
+      <div class="sidebar-card">
+        <h3>Sort By</h3>
+        <div id="sortOptions">
+          <label class="filter-option active-filter" onclick="setSort('newest', this)">
+            <input type="radio" name="sort" value="newest" checked> <span>Newest First</span>
+          </label>
+          <label class="filter-option" onclick="setSort('price-asc', this)">
+            <input type="radio" name="sort" value="price-asc"> <span>Price: Low to High</span>
+          </label>
+          <label class="filter-option" onclick="setSort('price-desc', this)">
+            <input type="radio" name="sort" value="price-desc"> <span>Price: High to Low</span>
+          </label>
+          <label class="filter-option" onclick="setSort('name', this)">
+            <input type="radio" name="sort" value="name"> <span>Name A–Z</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Filter Tags -->
+      <div class="sidebar-card">
+        <h3>Filter By</h3>
+        <label class="filter-option" onclick="setTagFilter('featured', this)">
+          <input type="checkbox" id="filterFeatured"> <span>⭐ Featured</span>
+        </label>
+        <label class="filter-option" onclick="setTagFilter('new', this)">
+          <input type="checkbox" id="filterNew"> <span>🆕 New Arrivals</span>
+        </label>
+        <label class="filter-option" onclick="setTagFilter('sale', this)">
+          <input type="checkbox" id="filterSale"> <span>🏷️ On Sale</span>
+        </label>
+      </div>
+
+      <!-- Clear Filters -->
+      <button class="apply-filter-btn" style="width:100%;margin-top:0" onclick="clearAllFilters()">Clear All Filters</button>
+    </aside>
+
+    <!-- PRODUCTS AREA -->
+    <main>
+      <div class="products-toolbar">
+        <div class="products-count">Showing <span id="productCount">0</span> products</div>
+        <select class="sort-select" id="sortSelectTop" onchange="setSort(this.value)">
+          <option value="newest">Newest First</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="name">Name A–Z</option>
+        </select>
+      </div>
+      <div class="products-grid" id="collectionGrid"></div>
+      <div style="text-align:center;margin-top:40px">
+        <button class="btn btn-outline" id="loadMoreBtn" style="display:none" onclick="loadMore()">Load More</button>
+      </div>
+    </main>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="assets/logo.png" alt="Nachi Clothing" onerror="this.style.display='none'">
+        <p>Nachi Clothing brings you the finest ethnic wear from across India. Sarees, kurtis, lehengas and more.</p>
+        <div class="social-links">
+          <a href="https://wa.me/919514142266" target="_blank" class="social-link">💬</a>
+          <a href="#" class="social-link">📷</a>
+          <a href="#" class="social-link">📘</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Collections</h4>
+        <ul id="footerCategories"></ul>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="collection.html">All Products</a></li>
+          <li><a href="collection.html?category=Made+to+Order">Made to Order</a></li>
+          <li><a href="admin.html">Owner Login</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact Us</h4>
+        <div class="footer-contact-item"><span class="icon">📱</span><span>+91 95141 42266</span></div>
+        <a href="https://wa.me/919514142266" target="_blank" class="whatsapp-btn">💬 Chat with Us</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom"><p>© 2025 <span>Nachi Clothing</span>. All rights reserved.</p></div>
+</footer>
+
+<!-- CART DRAWER -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-drawer-header">
+    <h3>🛒 Your Cart</h3>
+    <button class="cart-close" id="cartClose">✕</button>
+  </div>
+  <div class="cart-drawer-body" id="cartDrawerBody"></div>
+  <div class="cart-drawer-footer" id="cartDrawerFooter" style="display:none">
+    <div class="cart-summary" id="cartSummary"></div>
+    <button class="cart-cta-btn" id="orderWhatsApp">💬 Order via WhatsApp</button>
+    <button class="cart-continue" onclick="closeCartDrawer()">← Continue Shopping</button>
+  </div>
+</div>
+<div class="toast-container"></div>
+
+<script src="js/app.js"></script>
+<script src="js/cart.js"></script>
+<script>
+  // ---- Collection Page State ----
+  let currentCategory = '';
+  let currentSort = 'newest';
+  let priceMin = 0, priceMax = Infinity;
+  let tagFilters = { featured: false, new: false, sale: false };
+  let searchQuery = '';
+  let displayCount = 12;
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Parse URL params
+    const params = new URLSearchParams(window.location.search);
+    currentCategory = params.get('category') || '';
+    searchQuery = params.get('search') || '';
+    const filterParam = params.get('filter') || '';
+    if (filterParam === 'new') { tagFilters.new = true; document.getElementById('filterNew').checked = true; }
+
+    // Set banner title
+    const title = document.getElementById('pageBannerTitle');
+    const crumb = document.getElementById('breadcrumbCurrent');
+    if (currentCategory) {
+      title.textContent = currentCategory;
+      crumb.textContent = currentCategory;
+    } else if (searchQuery) {
+      title.textContent = `Search: "${searchQuery}"`;
+      crumb.textContent = `Search`;
+    }
+
+    // Build category nav links
+    const categories = getCategories();
+    const dropdown = document.getElementById('categoryDropdown');
+    if (dropdown) dropdown.innerHTML = categories.map(c => `<a href="collection.html?category=${encodeURIComponent(c)}">${c}</a>`).join('');
+    const mobileLinks = document.getElementById('mobileCategoryLinks');
+    if (mobileLinks) mobileLinks.innerHTML = categories.map(c => `<a href="collection.html?category=${encodeURIComponent(c)}">${c}</a>`).join('');
+
+    // Sidebar categories
+    const sidebarCats = document.getElementById('sidebarCategories');
+    if (sidebarCats) {
+      const allLabel = `<label class="filter-option ${!currentCategory ? 'active-filter' : ''}" onclick="setCategory('', this)">
+        <input type="radio" name="cat" ${!currentCategory ? 'checked' : ''}> <span>All Categories</span>
+        <span class="count">${getProducts().length}</span>
+      </label>`;
+      sidebarCats.innerHTML = allLabel + categories.map(c => {
+        const count = getProducts().filter(p => p.category === c).length;
+        return `<label class="filter-option ${currentCategory===c ? 'active-filter' : ''}" onclick="setCategory('${c}', this)">
+          <input type="radio" name="cat" ${currentCategory===c ? 'checked' : ''}> <span>${c}</span>
+          <span class="count">${count}</span>
+        </label>`;
+      }).join('');
+    }
+
+    // Footer categories
+    const footerCats = document.getElementById('footerCategories');
+    if (footerCats) footerCats.innerHTML = categories.map(c => `<li><a href="collection.html?category=${encodeURIComponent(c)}">${c}</a></li>`).join('');
+
+    renderCollection();
+  });
+
+  function getFilteredProducts() {
+    let products = getProducts();
+    if (currentCategory) products = products.filter(p => p.category === currentCategory);
+    if (searchQuery) {
+      const q = searchQuery.toLowerCase();
+      products = products.filter(p => p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q) || (p.caption||'').toLowerCase().includes(q));
+    }
+    if (priceMin > 0) products = products.filter(p => p.price >= priceMin);
+    if (priceMax < Infinity) products = products.filter(p => p.price <= priceMax);
+    if (tagFilters.featured) products = products.filter(p => p.isFeatured);
+    if (tagFilters.new) products = products.filter(p => p.isNewArrival);
+    if (tagFilters.sale) products = products.filter(p => p.originalPrice > p.price);
+
+    // Sort
+    if (currentSort === 'price-asc') products.sort((a,b) => a.price - b.price);
+    else if (currentSort === 'price-desc') products.sort((a,b) => b.price - a.price);
+    else if (currentSort === 'name') products.sort((a,b) => a.name.localeCompare(b.name));
+    else products.sort((a,b) => b.createdAt - a.createdAt);
+
+    return products;
+  }
+
+  function renderCollection() {
+    const products = getFilteredProducts();
+    const grid = document.getElementById('collectionGrid');
+    const countEl = document.getElementById('productCount');
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+
+    if (countEl) countEl.textContent = products.length;
+
+    const visible = products.slice(0, displayCount);
+    if (grid) {
+      grid.innerHTML = visible.length
+        ? visible.map(p => renderProductCard(p)).join('')
+        : `<div style="grid-column:1/-1;text-align:center;padding:80px 20px;color:var(--text-light)">
+            <div style="font-size:3rem;margin-bottom:16px">🔍</div>
+            <p style="font-size:1rem;margin-bottom:16px">No products found in this category yet.</p>
+            <a href="collection.html" style="color:var(--maroon);font-weight:600">View all products →</a>
+          </div>`;
+    }
+
+    if (loadMoreBtn) {
+      loadMoreBtn.style.display = products.length > displayCount ? 'inline-flex' : 'none';
+    }
+
+    // Restore wishlist state
+    const wishlist = getWishlist();
+    document.querySelectorAll('.product-wishlist').forEach(btn => {
+      const card = btn.closest('.product-card');
+      if (card && wishlist.includes(card.dataset.productId)) {
+        btn.textContent = '♥'; btn.classList.add('active');
+      }
+    });
+  }
+
+  function setCategory(cat, el) {
+    currentCategory = cat;
+    displayCount = 12;
+    document.querySelectorAll('#sidebarCategories .filter-option').forEach(l => l.classList.remove('active-filter'));
+    if (el) el.classList.add('active-filter');
+    const title = document.getElementById('pageBannerTitle');
+    const crumb = document.getElementById('breadcrumbCurrent');
+    if (title) title.textContent = cat || 'All Collections';
+    if (crumb) crumb.textContent = cat || 'Collections';
+    renderCollection();
+  }
+
+  function setSort(val, el) {
+    currentSort = val;
+    const select = document.getElementById('sortSelectTop');
+    if (select) select.value = val;
+    if (el) {
+      document.querySelectorAll('#sortOptions .filter-option').forEach(l => l.classList.remove('active-filter'));
+      el.classList.add('active-filter');
+    }
+    renderCollection();
+  }
+
+  function applyPriceFilter() {
+    priceMin = parseInt(document.getElementById('priceMin').value) || 0;
+    priceMax = parseInt(document.getElementById('priceMax').value) || Infinity;
+    displayCount = 12;
+    renderCollection();
+  }
+
+  function setTagFilter(tag, el) {
+    tagFilters[tag] = !tagFilters[tag];
+    displayCount = 12;
+    renderCollection();
+  }
+
+  function clearAllFilters() {
+    currentCategory = ''; currentSort = 'newest';
+    priceMin = 0; priceMax = Infinity;
+    tagFilters = { featured: false, new: false, sale: false };
+    searchQuery = ''; displayCount = 12;
+    document.getElementById('priceMin').value = '';
+    document.getElementById('priceMax').value = '';
+    document.getElementById('filterFeatured').checked = false;
+    document.getElementById('filterNew').checked = false;
+    document.getElementById('filterSale').checked = false;
+    document.getElementById('pageBannerTitle').textContent = 'All Collections';
+    document.getElementById('breadcrumbCurrent').textContent = 'Collections';
+    document.querySelectorAll('#sidebarCategories .filter-option').forEach(l => l.classList.remove('active-filter'));
+    const first = document.querySelector('#sidebarCategories .filter-option');
+    if (first) first.classList.add('active-filter');
+    renderCollection();
+  }
+
+  function loadMore() {
+    displayCount += 12;
+    renderCollection();
+  }
+</script>
+</body>
+</html>
